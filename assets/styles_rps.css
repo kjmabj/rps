@@ -1,0 +1,36 @@
+body {
+  background-color: #0c0c0d;
+}
+
+table {
+  color: white;
+  width: 100%;
+}
+
+.button {
+  background-color: #1b1b1d;
+  font: 35px courier, sans-serif;
+  color: white;
+  border-style: hidden;
+  width: 100%;
+  padding: 20px;
+}
+
+.button:hover {
+  background-color: gray;
+  color: black;
+}
+
+.score {
+  background-color: #2a2a2e;
+  font: 35px courier, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+#outcome {
+  background-color: #1b1b1d;
+  font: 35px courier, sans-serif;
+  text-align: center;
+  padding: 20px;
+}

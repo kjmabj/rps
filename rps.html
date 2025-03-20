@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <title>Rock, Paper, Scissors!</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="assets/styles_rps.css" />
+  </head>
+
+  <body>
+    <table align="center">
+      <tr>
+        <td colspan="3">
+          <input
+            class="button"
+            type="button"
+            id="rockbutton"
+            value="Rock"
+            onclick="playerRock()"
+          />
+          <tr>
+            <td>
+              <input
+                class="button"
+                type="button"
+                id="paperbutton"
+                value="Paper"
+                onclick="playerPaper()"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                class="button"
+                type="button"
+                id="scissorsbutton"
+                value="Scissors"
+                onclick="playerScissors()"
+              />
+            </td>
+          </tr>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="score" id="player">Player: 0</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="score" id="computer">Computer: 0</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="score" id="tie">Ties: 0</div>
+        </td>
+      </tr>
+      <tr>
+        <td id="outcome">
+          This is where the outcome of the game will be
+        </td>
+      </tr>
+    </table>
+
+    <script>
+      // Global variables
+      var computerMoveVal = null;
+      var playerMoveVal = null;
+      var computerScore = 0;
+      var playerScore = 0;
+      var tieScore = 0;
+      // Determines the move made by the computer
+      function computerMove(min = 1, max = 4) {
+        computerMoveVal = Math.floor(Math.random() * (max - min)) + min;
+        switch (computerMoveVal) {
+          case 1:
+            computerMoveVal = "rock";
+            break;
+          case 2:
+            computerMoveVal = "paper";
+            break;
+          case 3:
+            computerMoveVal = "scissors";
+            break;
+        }
+        return computerMoveVal;
+      }
+      // Functions to run when player clicks one of the three buttons
+      function playerRock() {
+        playerMoveVal = "rock";
+        outcome();
+      }
+      function playerPaper() {
+        playerMoveVal = "paper";
+        outcome();
+      }
+      function playerScissors() {
+        playerMoveVal = "scissors";
+        outcome();
+      }
+
+      function outcome() {
+        computerMoveVal = computerMove();
+        console.log(playerMoveVal);
+        console.log(computerMoveVal);
+        // Cases where the game results in a draw
+        if (playerMoveVal == computerMoveVal) {
+          document.getElementById("outcome").innerHTML =
+            "Both you and the computer threw " +
+            playerMoveVal +
+            "! It's a tie!";
+            tieScore++;
+        }
+        // Cases where the game is won by the player
+        else if (playerMoveVal == "rock" && computerMoveVal == "scissors") {
+          document.getElementById("outcome").innerHTML =
+            "Rock breaks scissors! You win!";
+            playerScore++;
+        } else if (playerMoveVal == "paper" && computerMoveVal == "rock") {
+          document.getElementById("outcome").innerHTML =
+            "Paper covers rock! You win!";
+            playerScore++;
+        } else if (playerMoveVal == "scissors" && computerMoveVal == "paper") {
+          document.getElementById("outcome").innerHTML =
+            "Scissors cuts paper! You win!";
+            playerScore++;
+        }
+
+        // Cases where the game is won by the computer
+        else if (playerMoveVal == "scissors" && computerMoveVal == "rock") {
+          document.getElementById("outcome").innerHTML =
+            "Rock breaks scissors! You lose!";
+            computerScore++;
+        } else if (playerMoveVal == "rock" && computerMoveVal == "paper") {
+          document.getElementById("outcome").innerHTML =
+            "Paper covers rock! You lose!";
+            computerScore++;
+        } else if (playerMoveVal == "paper" && computerMoveVal == "scissors") {
+          document.getElementById("outcome").innerHTML =
+            "Scissors cuts paper! You lose!";
+            computerScore++;
+        }
+        // Cases where something went wrong in the code and there is no winner
+        else {
+          alert("Something went wrong. Nobody wins.");
+        }
+      document.getElementById("tie").innerHTML = "Ties: " + tieScore;
+      document.getElementById("player").innerHTML = "Player: " + playerScore;
+      document.getElementById("computer").innerHTML = "Computer: " + computerScore;
+      }
+    </script>
+  </body>
+</html>
